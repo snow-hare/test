@@ -20,6 +20,11 @@ public class movement : MonoBehaviour
         collider = GetComponent<Collider>();
     }
 
+    public void Respawn()
+    {
+        transform.position = respawn;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -47,20 +52,24 @@ public class movement : MonoBehaviour
         GetComponent<Rigidbody>().velocity = new Vector3(newVel.x, newVel.y, 0);
         if (transform.position.y < -50)
         {
-            transform.position = respawn;
+            Respawn();
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (Physics.Raycast(transform.position, Vector3.down, transform.localScale.y / 2f + 0.1f) || Physics.Raycast(transform.position, Vector3.down, transform.localScale.y / 2f + 0.1f))
+        if (Physics.Raycast(transform.position, Vector3.down, transform.localScale.y / 2f + 0.1f) || Physics.Raycast(transform.position + Vector3.left * 0.5f * transform.localScale.x, Vector3.down, transform.localScale.y / 2f + 0.1f) || Physics.Raycast(transform.position + Vector3.right * 0.5f * transform.localScale.x, Vector3.down, transform.localScale.y / 2f + 0.1f))
         {
             onGround = true;
+        }
+        if (collision.transform.GetComponent<enemyScript>())
+        {
+            Respawn();
         }
     }
     private void OnCollisionExit(Collision collision)
     {
-        if (!(Physics.Raycast(transform.position, Vector3.down, transform.localScale.y / 2f + 0.1f)))
+        if (!(Physics.Raycast(transform.position, Vector3.down, transform.localScale.y / 2f + 0.1f) || Physics.Raycast(transform.position + Vector3.left * 0.5f * transform.localScale.x, Vector3.down, transform.localScale.y / 2f + 0.1f) || Physics.Raycast(transform.position + Vector3.right * 0.5f * transform.localScale.x, Vector3.down, transform.localScale.y / 2f + 0.1f)))
         {
             onGround = false;
         }

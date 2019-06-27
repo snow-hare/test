@@ -11,6 +11,6 @@ public class CameraFollow : MonoBehaviour
     {
         Vector3 destination = transform.position + new Vector3(0, 0, -10);
         if (cam)
-            cam.transform.position = Vector3.Lerp(cam.transform.position, destination, 0.9f);
+            cam.transform.position = Vector3.Lerp(cam.transform.position, destination, 0.99f);
     }
 }
