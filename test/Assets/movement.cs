@@ -10,7 +10,7 @@ public class movement : MonoBehaviour
     KeyCode up = KeyCode.UpArrow;
     KeyCode right = KeyCode.RightArrow;
     KeyCode left = KeyCode.LeftArrow;
-    Vector3 respawn;
+    public Vector3 respawn;
     Collider collider;
 
     // Start is called before the first frame update
@@ -53,7 +53,7 @@ public class movement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (Physics.Raycast(transform.position, Vector3.down, transform.localScale.y / 2f + 0.1f))
+        if (Physics.Raycast(transform.position, Vector3.down, transform.localScale.y / 2f + 0.1f) || Physics.Raycast(transform.position, Vector3.down, transform.localScale.y / 2f + 0.1f))
         {
             onGround = true;
         }

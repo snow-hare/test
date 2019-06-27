@@ -28,4 +28,12 @@ public class enemyScript : MonoBehaviour
             Gizmos.DrawLine(transform.position, transform.position + rb.velocity);
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<movement>())
+        {
+            other.GetComponent<movement>().transform.position = other.GetComponent<movement>().respawn;
+        }
+    }
 }
